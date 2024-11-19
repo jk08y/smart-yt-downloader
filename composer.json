@@ -1,0 +1,13 @@
+{
+    "require": {
+        "norkunas/youtube-dl-php": "^2.1",
+        "symfony/process": "^5.4"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "platform": {
+            "php": "7.4"
+        }
+    }
+}
