@@ -144,4 +144,7 @@ If you encounter any issues or have questions, please [open an issue](https://gi
 [fontawesome]: https://fontawesome.com/
 
 
+## Lets connect
 
+-  𝕏: [@jk08y](https://x.com/jk08y)
+- GitHub: [@jk08y](https://github.com/jk08y)
