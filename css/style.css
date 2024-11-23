@@ -1,0 +1,47 @@
+/* css/style.css */
+.hover\:shadow-3xl:hover {
+    box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+}
+
+.hover\:scale-102:hover {
+    transform: scale(1.02);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}
+
+/* Input focus animation */
+input:focus, select:focus {
+    transform: translateY(-1px);
+}
+
+/* Progress bar animation */
+@keyframes progress {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 29px 0;
+    }
+}
+
+.progress-animated {
+    background: linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%, transparent);
+    background-size: 29px 29px;
+    animation: progress 1s linear infinite;
+}

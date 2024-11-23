@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart YouTube Downloader</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body class="font-sans antialiased">
+    <div class="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+        <!-- Header -->
+        <header class="bg-white shadow-lg">
+            <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <i class="fas fa-video text-indigo-600 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-800">Smart YouTube Downloader</span>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-lg mx-auto">
+                <!-- Main Card -->
+                <div class="bg-white shadow-2xl rounded-2xl overflow-hidden transform transition-all duration-300 hover:shadow-3xl">
+                    <!-- Card Header -->
+                    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 text-center">
+                        <h1 class="text-4xl font-bold text-white mb-2">
+                            <i class="fas fa-download mr-3"></i>Download Videos
+                        </h1>
+                        <p class="text-indigo-100">Convert and download YouTube videos in MP4/MP3 format</p>
+                    </div>
+
+                    <!-- Form Section -->
+                    <div class="p-8">
+                        <form id="downloadForm" class="space-y-6">
+                            <!-- URL Input -->
+                            <div class="space-y-2">
+                                <label for="videoUrl" class="block text-sm font-medium text-gray-700">
+                                    Video URL
+                                </label>
+                                <div class="relative rounded-xl shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-link text-gray-400"></i>
+                                    </div>
+                                    <input 
+                                        type="text" 
+                                        id="videoUrl" 
+                                        placeholder="Paste YouTube video link here" 
+                                        class="block w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300"
+                                    >
+                                </div>
+                                <p id="errorMessage" class="text-red-500 text-sm mt-1 hidden"></p>
+                            </div>
+
+                            <!-- Format Selection -->
+                            <div class="space-y-2">
+                                <label for="formatSelect" class="block text-sm font-medium text-gray-700">
+                                    Download Format
+                                </label>
+                                <div class="relative rounded-xl shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-file-download text-gray-400"></i>
+                                    </div>
+                                    <select 
+                                        id="formatSelect" 
+                                        class="block w-full pl-10 pr-10 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 appearance-none transition-all duration-300"
+                                    >
+                                        <option value="mp4_720">MP4 - 720p</option>
+                                        <option value="mp4_1080">MP4 - 1080p</option>
+                                        <option value="mp3_320">MP3 - 320kbps</option>
+                                        <option value="mp3_192">MP3 - 192kbps</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3">
+                                        <i class="fas fa-chevron-down text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Download Button -->
+                            <button 
+                                type="submit" 
+                                class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-102 flex items-center justify-center font-medium text-lg"
+                            >
+                                <i class="fas fa-cloud-download-alt mr-3"></i>
+                                Start Download
+                            </button>
+                        </form>
+
+                        <!-- Progress Bar -->
+                        <div id="progressContainer" class="mt-8 hidden">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between text-sm">
+                                    <span id="progressText" class="text-gray-600">Preparing download...</span>
+                                    <span id="progressPercentage" class="text-indigo-600 font-medium">0%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div id="progressBar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features Section -->
+                    <div class="bg-gray-50 px-8 py-6">
+                        <div class="grid grid-cols-3 gap-4 text-center text-sm">
+                            <div>
+                                <i class="fas fa-bolt text-yellow-500 text-lg mb-1"></i>
+                                <p class="text-gray-600">Fast Download</p>
+                            </div>
+                            <div>
+                                <i class="fas fa-shield-alt text-green-500 text-lg mb-1"></i>
+                                <p class="text-gray-600">100% Safe</p>
+                            </div>
+                            <div>
+                                <i class="fas fa-infinity text-blue-500 text-lg mb-1"></i>
+                                <p class="text-gray-600">No Limits</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instructions -->
+                <div class="mt-8 bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">How to Download</h2>
+                    <ol class="space-y-3 text-gray-600">
+                        <li class="flex items-center">
+                            <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-medium text-sm mr-3">1</span>
+                            Copy the YouTube video URL
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-medium text-sm mr-3">2</span>
+                            Paste the URL in the input field above
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-medium text-sm mr-3">3</span>
+                            Select your preferred format
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-medium text-sm mr-3">4</span>
+                            Click the download button and wait
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
