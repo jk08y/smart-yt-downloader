@@ -2,8 +2,6 @@
 
 A modern, user-friendly YouTube video downloader with a sleek UI built using PHP, JavaScript, and Tailwind CSS. Download YouTube videos in various formats (MP4/MP3) with different quality options.
 
-![Smart YT Downloader Interface](https://raw.githubusercontent.com/jk08y/smart-yt-downloader/refs/heads/main/screenshots/screenshot_11-19%2023-02-19.png)
-
 ## Demo
 
 ![Smart YouTube Downloader Demo](https://raw.githubusercontent.com/jk08y/smart-yt-downloader/refs/heads/improved-version/demo/download-demo.gif)
